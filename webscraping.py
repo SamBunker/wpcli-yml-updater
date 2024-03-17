@@ -5,16 +5,7 @@ from config import *
 
 def get_yearlyTheme(core_version):
   # Check if Config is set (version)
-  if (core_version == MANUAL_LATEST_RELEASE):
-    if (LATEST_YEAR_THEME != ""):
-      url = LATEST_YEAR_THEME
-      yearly_theme = url.split("/")[-2:][0]
-      response = requests.get(url)
-      if response.status_code == 200:
-        return yearly_theme, response.text
-      else:
-        raise ValueException("Error fetching webpage: " + str(response.status_code))
-    
+  
   core_version_float = float(0)
 
   if (core_version.count(".") == 1): core_version_float = (float(core_version.replace('.', '')) * 10)
@@ -22,7 +13,7 @@ def get_yearlyTheme(core_version):
 
   if core_version_float > 640:
     url = "https://wordpress.org/themes/twentytwentyfour/"
-  elif core_version_float > 610 and core_version_float < 640:
+  elif core_version_float > 609 and core_version_float < 640:
     url = "https://wordpress.org/themes/twentytwentythree/"
   yearly_theme = url.split("/")[-2:][0]
   response = requests.get(url)
@@ -90,26 +81,3 @@ def get_versionWP(plugin_name):
     return version
   else:
     version = None
-
-# Find Plugin on Company Plugin Website
-def get_webpageC(plugin_name):
-  url = f"REDACTED URL"
-  response = requests.get(url)
-  if response.status_code == 200:
-    return response.text
-  else:
-    raise ValueError(f"Error fetching webpage: {response.status_code} for {plugin_name}")
-
-def get_versionC(plugin_name):
-  page_content = get_webpageC(plugin_name)
-  soup = BeautifulSoup(page_content, "html.parser")
-
-  # Find the element containing the version string
-  version_element = soup.select_one("table").text
-  for line in reversed(version_element.splitlines()):
-    if line:
-      version = line.split(".zip")[0]
-      return version
-      break
-  else:
-    print("No non-empty line found.")

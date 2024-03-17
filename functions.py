@@ -51,7 +51,7 @@ def get_versions_from_array(array):
     return []
 
 def write_to_file(array):
-  print("7. Exporting Everything to Output File")
+  print("6. Exporting Everything to Output File")
   try:
     with open("txts/export.txt", "w") as f:
       for text in array:
@@ -63,10 +63,10 @@ s = []
 
 def categorize_plugins(text):
   wordpress = []
-  company = []
+  #company = []
   temp = []
   wp_disabled = []
-  company_disabled = []
+  #company_disabled = []
   for line in text:
     if line.strip():
       parts = line.split(":")
@@ -79,18 +79,6 @@ def categorize_plugins(text):
   while len(temp) > 0:
     try:
       if temp[0][1] == "":
-        if temp[1][0] == "version" and temp[2][0] == "source":
-          try:
-            if temp[3][0] != None and temp[3][0] == "inactive":
-              company_disabled.append(temp[0][0])
-              pop_enumerate(4)
-            else:
-              company.append(temp[0][0])
-              pop_enumerate(3)
-          except IndexError:
-            company.append(temp[0][0])
-            pop_enumerate(3)
-            pass
         if temp[1][0] == "version" and temp[2][0] == "inactive":
           wordpress.append(temp[0][0])
           wp_disabled.append(temp[0][0])
@@ -102,7 +90,7 @@ def categorize_plugins(text):
     except IndexError:
       pass
 
-  return wordpress, company, wp_disabled, company_disabled
+  return wordpress, wp_disabled
 
 def strip_themes(array, yearly_theme):
   themes = []

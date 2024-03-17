@@ -10,7 +10,8 @@ before_build, build, plugins, themes = split_the_file("txts/yml-paste.txt")
 new_build = get_versionCore(get_build_version(build))
 print("2. Fetched Latest Core Version")
 
-wordpress, company, wp_disabled, company_disabled = categorize_plugins(get_versions_from_array(plugins))
+# Remove Company & company_disabled since this is pulling only wordpress plugins
+wordpress, wp_disabled = categorize_plugins(get_versions_from_array(plugins))
 print("3. Fetched Plugins and their Versions")
 
 yearly_theme, theme_version = get_versionYearlyTheme(new_build)
@@ -25,17 +26,6 @@ for plugin_name in wordpress:
       s.append(plugin_name + ":\n            version: " + version + "\n            inactive: true")
     else:
       s.append(plugin_name + ": " + version)
-  else:
-    print(f"Version for {plugin_name}: not found.")
-
-print("6. Now fetching Company Plugins")
-for plugin_name in company:
-  version = get_versionC(plugin_name)
-  if version:
-    if plugin_name in company_disabled:
-      s.append(plugin_name + ":\n            version: " + version + "\n            source: jpl" + "\n            inactive: true")
-    else:
-      s.append(plugin_name + ":\n            version: " + version + "\n            source: jpl")
   else:
     print(f"Version for {plugin_name}: not found.")
 
