@@ -83,6 +83,7 @@ def get_versionWP(plugin_name):
 # Find Plugin on Company Plugin Website
 def get_webpageC(plugin_name):
   url = f"REDACTED URL"
+  # URL fetches like, f"https//:www.google.com/plugins/{plugin_name}/"
   response = requests.get(url)
   if response.status_code == 200:
     return response.text
