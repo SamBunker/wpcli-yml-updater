@@ -3,18 +3,7 @@ import requests
 import re
 from config import *
 
-def get_yearlyTheme(core_version):
-  # Check if Config is set (version)
-  if (core_version == MANUAL_LATEST_RELEASE):
-    if (LATEST_YEAR_THEME != ""):
-      url = LATEST_YEAR_THEME
-      yearly_theme = url.split("/")[-2:][0]
-      response = requests.get(url)
-      if response.status_code == 200:
-        return yearly_theme, response.text
-      else:
-        raise ValueException("Error fetching webpage: " + str(response.status_code))
-    
+def get_yearlyTheme(core_version):  
   core_version_float = float(0)
 
   if (core_version.count(".") == 1): core_version_float = (float(core_version.replace('.', '')) * 10)
