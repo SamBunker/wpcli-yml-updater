@@ -1,0 +1,46 @@
+##
+##
+##
+build:
+    core: 6.4.3
+    plugins:
+        acf-content-analysis-for-yoast-seo: 3.1
+        advanced-custom-fields-pro:
+            version: 6.2.7
+            source: jpl
+        disable-comments: 2.4.5
+        gravityforms:
+            version: 2.8.4.1
+            source: jpl
+            inactive: true
+        gravityformswebhooks:
+            version: 1.5
+            source: jpl
+        sitepress-multilingual-cms:
+            version: 4.6.8
+            source: jpl
+        wordfence:
+            version: 7.11.3
+            inactive: true
+        wordpress-seo: 22.2
+        wp-all-import-pro:
+            version: 4.8.5
+            source: jpl
+        wp-optimize: 3.3.0
+        wpml-media-translation:
+            version: 2.7.3
+            source: jpl
+        wpml-string-translation:
+            version: 3.2.8
+            source: jpl
+    themes:
+        jpl:
+            version: 4.6
+            source: jpl
+            inactive: true
+        trex-careers:
+            version: 1.0
+            source: local
+        twentytwentyfour:
+            version: 1.0
+            inactive: true
